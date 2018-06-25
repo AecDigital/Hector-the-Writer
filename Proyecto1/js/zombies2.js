@@ -8,12 +8,12 @@ function zombie2(game) {
   this.img.frames = 4;
   this.img.frameIndex = 0;
 
-  this.w = 160;
-  this.h = 200;
+  this.w = 130;
+  this.h = 190;
   this.dx = 2;
 
   this.x = this.game.canvas.width;
-  this.y = 325;
+  this.y = 225;
 
 }
 zombie2.prototype.draw = function() {

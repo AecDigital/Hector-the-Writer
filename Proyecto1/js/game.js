@@ -7,38 +7,66 @@ function Game(canvadId) {
 }
 
 Game.prototype.start = function() {
-  this.interval = setInterval(function() {
-    this.clear();
+  this.interval = setInterval(
+    function() {
+      this.clear();
 
-    this.framesCounter++;
+      this.framesCounter++;
 
-    if (this.framesCounter > 1000) {
-      this.framesCounter = 0;
-    }
+      if (this.framesCounter > 1000) {
+        this.framesCounter = 0;
+      }
 
-    if (this.framesCounter % (Math.floor(Math.random()*(200 - 120))+120)===0){
-      this.generateObstacle();
-    }
+      if (
+        this.framesCounter %
+        (Math.floor(Math.random() * (200 - 120)) + 120) ===
+        0
+      ) {
+        this.generateObstacle();
+      }
 
-    if (this.framesCounter % (Math.floor(Math.random()*(220 - 50))+50)===0){
-            this.generateZombie();
-    }
+      if (
+        this.framesCounter %
+        (Math.floor(Math.random() * (220 - 50)) + 50) ===
+        0
+      ) {
+        this.generateZombie();
+      }
 
-    if (this.framesCounter % (Math.floor(Math.random()*(220 - 100))+100)===0){
-      this.generateZombie2();
-    }
+      if (
+        this.framesCounter %
+        (Math.floor(Math.random() * (220 - 100)) + 100) ===
+        0
+      ) {
+        this.generateZombie2();
+      }
 
-    this.score += 0.01;
-    
-    this.draw();
-    this.moveAll();
+      this.score += 0.01;
 
-    this.clearObstacles();
+      this.draw();
+      this.moveAll();
 
-    if (this.isCollision()) {
-      this.gameOver();
-    }
-  }.bind(this), 1000 / this.fps);
+      this.clearObstacles();
+
+      if (this.isCollision(this.zombies)) {
+        this.gameOver();
+      }
+
+      if (this.isCollision(this.zombies2)) {
+        this.gameOver();
+      }
+
+      if (this.isCollision(this.obstacles)) {
+        this.gameOver();
+      }
+
+      this.isImpacted(this.obstacles);
+      this.isImpacted(this.zombies);
+      this.isImpacted(this.zombies2);
+      
+    }.bind(this),
+    1000 / this.fps
+  );
 };
 
 Game.prototype.stop = function() {
@@ -47,8 +75,8 @@ Game.prototype.stop = function() {
 
 Game.prototype.gameOver = function() {
   this.stop();
-  
-  if(confirm("GAME OVER. Play again?")) {
+
+  if (confirm("GAME OVER. Play again?")) {
     this.reset();
     this.start();
   }
@@ -64,13 +92,33 @@ Game.prototype.reset = function() {
   this.score = 0;
 };
 
-Game.prototype.isCollision = function() {
-  return this.zombies.some(
-    function(zombie) {
-      return (this.player.x >= zombie.x2);
+Game.prototype.isCollision = function(enemy) {
+  return enemy.some(
+    function(e) {
+      return ((this.player.x + 50) == e.x && (this.player.y + this.player.h) >= e.y);
     }.bind(this)
   );
 };
+
+Game.prototype.isImpacted = function(enemy){
+  console.log("Entra");
+  return enemy.some(
+    function(e) {
+      for (i=0; i < this.player.bullets.length; i++){
+      if ((this.player.bullets[i].x >= e.x)) {
+        console.log("Colosiona!")
+        enemy.splice(e, 1);
+      
+      return true
+      } else {
+        return false
+      }
+    }
+    }.bind(this)
+  
+  );
+};
+
 
 Game.prototype.clearObstacles = function() {
   this.obstacles = this.obstacles.filter(function(obstacle) {
@@ -102,7 +150,6 @@ Game.prototype.generateZombie2 = function() {
   this.zombies.push(new zombie2(this));
 };
 
-
 Game.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
@@ -110,14 +157,18 @@ Game.prototype.clear = function() {
 Game.prototype.draw = function() {
   this.background.draw();
   this.player.draw();
-  this.obstacles.forEach(function(obstacle) { obstacle.draw(); });
-  this.zombies.forEach(function(zombie) { zombie.draw(); });
-  this.zombies2.forEach(function(zombie2) { zombie2.draw(); });
-
-
+  this.obstacles.forEach(function(obstacle) {
+    obstacle.draw();
+  });
+  this.zombies.forEach(function(zombie) {
+    zombie.draw();
+  });
+  this.zombies2.forEach(function(zombie2) {
+    zombie2.draw();
+  });
 
   this.ctx.font = "75px sans-serif";
-  this.ctx.fillStyle = "white";
+  this.ctx.fillStyle = "green";
   this.ctx.fillText(Math.floor(this.score), 75, 150);
 };
 
@@ -125,9 +176,13 @@ Game.prototype.moveAll = function() {
   this.background.move();
   this.player.move();
 
-  this.obstacles.forEach(function(obstacle) { obstacle.move(); });
-  this.zombies.forEach(function(zombie) { zombie.move(); });
-  this.zombies.forEach(function(zombie2) { zombie2.move(); });
-
-
+  this.obstacles.forEach(function(obstacle) {
+    obstacle.move();
+  });
+  this.zombies.forEach(function(zombie) {
+    zombie.move();
+  });
+  this.zombies.forEach(function(zombie2) {
+    zombie2.move();
+  });
 };

@@ -2,7 +2,7 @@ function Player(game) {
   this.game = game;
  
   this.x = this.game.canvas.width * 0.08;
-  this.y0 = this.game.canvas.height * 0.35;
+  this.y0 = this.game.canvas.height * 0.38;
   this.y = this.y0;
 
   this.img = new Image();
@@ -10,8 +10,8 @@ function Player(game) {
   this.img.frames = 10;
   this.img.frameIndex = 0;
 
-  this.w = 210;
-  this.h = 210;
+  this.w = 180;
+  this.h = 180;
 
   this.vy = 1;
   this.a = 1.5;
@@ -59,7 +59,6 @@ Player.prototype.setListeners = function() {
 
 Player.prototype.shoot = function() {
   var bullet = new Bullet(this.game, this.x + this.w, this.y + this.h / 2);
-
   this.bullets.push(bullet);
 };
 
