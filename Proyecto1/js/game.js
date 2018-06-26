@@ -41,8 +41,6 @@ Game.prototype.start = function() {
         this.generateZombie2();
       }
 
-      this.score += 0.01;
-
       this.draw();
       this.moveAll();
 
@@ -63,7 +61,6 @@ Game.prototype.start = function() {
       this.isImpacted(this.obstacles);
       this.isImpacted(this.zombies);
       this.isImpacted(this.zombies2);
-      
     }.bind(this),
     1000 / this.fps
   );
@@ -85,40 +82,51 @@ Game.prototype.gameOver = function() {
 Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
+  this.enemyKilled = new enemykilled(this);
   this.obstacles = [];
   this.zombies = [];
   this.zombies2 = [];
   this.framesCounter = 0;
   this.score = 0;
+  this.killed = [];
 };
 
 Game.prototype.isCollision = function(enemy) {
   return enemy.some(
     function(e) {
-      return ((this.player.x + 50) == e.x && (this.player.y + this.player.h) >= e.y);
+      return this.player.x + 50 == e.x && this.player.y + this.player.h >= e.y;
     }.bind(this)
   );
 };
 
-Game.prototype.isImpacted = function(enemy){
+Game.prototype.isImpacted = function(enemy) {
   console.log("Entra");
   return enemy.some(
     function(e) {
-      for (i=0; i < this.player.bullets.length; i++){
-      if ((this.player.bullets[i].x >= e.x)) {
-        console.log("Colosiona!")
-        enemy.splice(e, 1);
-      
-      return true
-      } else {
-        return false
+      for (i = 0; i < this.player.bullets.length; i++) {
+        if (
+          this.player.bullets[i].x > e.x + (e.w - 100) &&
+          this.player.bullets[i].x + this.player.bullets[i].w > e.x &&
+          this.player.bullets[i].y < e.y + e.h &&
+          this.player.bullets[i].y + this.player.bullets[i].h > e.y
+        ) 
+          {
+            console.log("Colosiona!");
+
+            this.enemyKilled.draw(e.x, e.y);
+            this.killed++;
+            enemy.splice(e, 1);
+            this.player.bullets.splice(this.player.bullets[i]);
+            this.score = this.score + 10;
+          
+          return true;
+        } else {
+          return false;
+        }
       }
-    }
     }.bind(this)
-  
   );
 };
-
 
 Game.prototype.clearObstacles = function() {
   this.obstacles = this.obstacles.filter(function(obstacle) {
@@ -167,9 +175,9 @@ Game.prototype.draw = function() {
     zombie2.draw();
   });
 
-  this.ctx.font = "75px sans-serif";
-  this.ctx.fillStyle = "green";
-  this.ctx.fillText(Math.floor(this.score), 75, 150);
+  this.ctx.font = "50px sans-serif";
+  this.ctx.fillStyle = "black";
+  this.ctx.fillText("Score: " + Math.floor(this.score) + " points!", 50, 75);
 };
 
 Game.prototype.moveAll = function() {

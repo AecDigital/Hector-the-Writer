@@ -2,8 +2,9 @@ function Bullet(game, x, y) {
   this.game = game;
   this.x = x;
   this.y = y;
-
   this.r = 5;
+  this.w = this.r*2;
+  this.h = this.w;
 
   this.vx = 10;
   this.vy = 1;
