@@ -42,7 +42,7 @@ Game.prototype.start = function() {
 
       if (
         this.framesCounter %
-        (Math.floor(Math.random() * (220 - 100)) + 100) ===
+        (Math.floor(Math.random() * (300 - 200)) + 200) ===
         0
       ) {
         this.generatePapers();
@@ -265,4 +265,5 @@ Game.prototype.moveAll = function() {
   this.papers.forEach(function(paper) {
     paper.move();
   });
+  
 };

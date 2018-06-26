@@ -5,10 +5,10 @@ function paperhit(game) {
 
   this.img = new Image();
   this.img.src = "./img/yeah.png";
-  this.x = 520;
-  this.y = 100;
-  this.w = 550;
-  this.h = 450;
+  this.x = 350;
+  this.y = 75;
+  this.w = 250;
+  this.h = 150;
 }
 paperhit.prototype.draw = function() {
   this.game.ctx.drawImage(

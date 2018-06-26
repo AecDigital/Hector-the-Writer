@@ -9,7 +9,7 @@ function zombie2(game) {
   this.img.frameIndex = 0;
 
   this.w = 130;
-  this.h = 190;
+  this.h = 170;
   this.dx = 2;
 
   this.x = this.game.canvas.width;
