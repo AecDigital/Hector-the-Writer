@@ -3,7 +3,7 @@ function Bullet(game, x, y) {
   this.x = x;
   this.y = y;
   this.r = 5;
-  this.w = this.r*2;
+  this.w = this.r*4;
   this.h = this.w;
 
   this.vx = 10;
@@ -14,7 +14,7 @@ function Bullet(game, x, y) {
 
 Bullet.prototype.draw = function() {
   this.game.ctx.beginPath();
-  this.game.ctx.fillStyle = "white";
+  this.game.ctx.fillStyle = "#00ffbf";
   this.game.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 5);
   this.game.ctx.fill();
   this.game.ctx.closePath();

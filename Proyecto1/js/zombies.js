@@ -10,7 +10,7 @@ function zombie(game) {
 
 
   this.w = 130;
-  this.h = 190;
+  this.h = 150;
   this.dx = 2;
 
   this.x = this.game.canvas.width;
