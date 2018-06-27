@@ -8,9 +8,14 @@ function Game(canvadId) {
   this.obstaclefrecuence = 0;
   this.zombie2frecuence = 0;
   this.papersfrecuence = 0;
+  this.music = new Audio("audio/game_music.mp3");
+  this.gameoversound = new Audio("audio/game_music.mp3")
 }
 
 Game.prototype.start = function() {
+  this.music.play();
+  this.music.volume = .5;
+  this.music.loop = true;
   this.interval = setInterval(
     function() {
       this.clear();
@@ -79,14 +84,19 @@ Game.prototype.start = function() {
 
       if (this.isCollision(this.zombies)) {
         this.gameOver();
+        this.music.stop();
+
       }
 
       if (this.isCollision(this.zombies2)) {
         this.gameOver();
+        this.music.stop();
       }
 
       if (this.isCollision2(this.obstacles)) {
         this.gameOver();
+        this.music.stop();
+
       }
 
       if (this.isgetpapers(this.papers)) {
