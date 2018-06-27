@@ -22,30 +22,33 @@ Game.prototype.start = function() {
       }
 
       if (this.level == 1) {
-        this.zombiefrecuence = ((120 - 20) + 20)*8;
-        this.obstaclefrecuence = ((100 - 20) + 20)*8;
-        this.zombie2frecuence = ((100 - 50) + 50)*8;
-        this.papersfrecuence = ((200 - 100) + 100)*8;
+        this.zombiefrecuence = (120 - 20 + 20) * 8;
+        this.obstaclefrecuence = (100 - 20 + 20) * 8;
+        this.zombie2frecuence = (100 - 50 + 50) * 8;
+        this.papersfrecuence = (200 - 100 + 100) * 8;
       } else if (this.level == 2) {
-        this.zombiefrecuence = ((150 - 50) + 50)*4;
-        this.obstaclefrecuence = ((150 - 50) + 50)*4;
-        this.zombie2frecuence = ((150 - 70) + 57)*4;
-        this.papersfrecuence = ((250 - 150) + 150)*4;
+        this.zombiefrecuence = (150 - 50 + 50) * 4;
+        this.obstaclefrecuence = (150 - 50 + 50) * 4;
+        this.zombie2frecuence = (150 - 70 + 57) * 4;
+        this.papersfrecuence = (250 - 150 + 150) * 4;
       } else {
-        this.zombiefrecuence = ((200 - 70) + 70)*3;
-        this.obstaclefrecuence = ((200 - 70) + 70)*3;
-        this.zombie2frecuence = ((220 - 90) + 90)*3;
-        this.papersfrecuence = ((200- 100) + 100)*3;
+        this.zombiefrecuence = (200 - 70 + 70) * 3;
+        this.obstaclefrecuence = (200 - 70 + 70) * 3;
+        this.zombie2frecuence = (220 - 90 + 90) * 3;
+        this.papersfrecuence = (200 - 100 + 100) * 3;
       }
 
-      if (this.framesCounter % (Math.floor(Math.random() * this.obstaclefrecuence)) === 0
+      if (
+        this.framesCounter %
+        Math.floor(Math.random() * this.obstaclefrecuence) ===
+        0
       ) {
         this.generateObstacle();
       }
 
       if (
         this.framesCounter %
-        (Math.floor(Math.random() * this.zombiefrecuence)) ===
+        Math.floor(Math.random() * this.zombiefrecuence) ===
         0
       ) {
         this.generateZombie();
@@ -53,7 +56,7 @@ Game.prototype.start = function() {
 
       if (
         this.framesCounter %
-        (Math.floor(Math.random() * this.zombie2frecuence)) ===
+        Math.floor(Math.random() * this.zombie2frecuence) ===
         0
       ) {
         this.generateZombie2();
@@ -61,7 +64,7 @@ Game.prototype.start = function() {
 
       if (
         this.framesCounter %
-        (Math.floor(Math.random() * this.papersfrecuence)) ===
+        Math.floor(Math.random() * this.papersfrecuence) ===
         0
       ) {
         this.generatePapers();
@@ -136,13 +139,15 @@ Game.prototype.isCollision = function(enemy) {
 };
 
 Game.prototype.isCollision2 = function(enemy) {
-  console.log("hola")
+  console.log("hola");
   return enemy.some(
     function(e) {
-      return this.player.x +50 > e.x + (e.w - 100) &&
-      this.player.x + this.player.w > e.x &&
-      this.player.y < e.y + e.h &&
-      this.player.y + this.player.h > e.y;
+      return (
+        this.player.x + 50 > e.x + (e.w - 100) &&
+        this.player.x + this.player.w > e.x &&
+        this.player.y < e.y + e.h &&
+        this.player.y + this.player.h > e.y
+      );
     }.bind(this)
   );
 };
