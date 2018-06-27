@@ -3,6 +3,11 @@ function Game(canvadId) {
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;
   this.reset();
+  this.level = 1;
+  this.zombiefrecuence = 0;
+  this.obstaclefrecuence = 0;
+  this.zombie2frecuence = 0;
+  this.papersfrecuence = 0;
 }
 
 Game.prototype.start = function() {
@@ -16,17 +21,31 @@ Game.prototype.start = function() {
         this.framesCounter = 0;
       }
 
-      if (
-        this.framesCounter %
-        (Math.floor(Math.random() * (200 - 120)) + 120) ===
-        0
+      if (this.level == 1) {
+        this.zombiefrecuence = ((120 - 20) + 20)*8;
+        this.obstaclefrecuence = ((100 - 20) + 20)*8;
+        this.zombie2frecuence = ((100 - 50) + 50)*8;
+        this.papersfrecuence = ((200 - 100) + 100)*8;
+      } else if (this.level == 2) {
+        this.zombiefrecuence = ((150 - 50) + 50)*4;
+        this.obstaclefrecuence = ((150 - 50) + 50)*4;
+        this.zombie2frecuence = ((150 - 70) + 57)*4;
+        this.papersfrecuence = ((250 - 150) + 150)*4;
+      } else {
+        this.zombiefrecuence = ((200 - 70) + 70)*3;
+        this.obstaclefrecuence = ((200 - 70) + 70)*3;
+        this.zombie2frecuence = ((220 - 90) + 90)*3;
+        this.papersfrecuence = ((200- 100) + 100)*3;
+      }
+
+      if (this.framesCounter % (Math.floor(Math.random() * this.obstaclefrecuence)) === 0
       ) {
         this.generateObstacle();
       }
 
       if (
         this.framesCounter %
-        (Math.floor(Math.random() * (220 - 50)) + 50) ===
+        (Math.floor(Math.random() * this.zombiefrecuence)) ===
         0
       ) {
         this.generateZombie();
@@ -34,7 +53,7 @@ Game.prototype.start = function() {
 
       if (
         this.framesCounter %
-        (Math.floor(Math.random() * (220 - 100)) + 100) ===
+        (Math.floor(Math.random() * this.zombie2frecuence)) ===
         0
       ) {
         this.generateZombie2();
@@ -42,7 +61,7 @@ Game.prototype.start = function() {
 
       if (
         this.framesCounter %
-        (Math.floor(Math.random() * (300 - 200)) + 200) ===
+        (Math.floor(Math.random() * this.papersfrecuence)) ===
         0
       ) {
         this.generatePapers();
@@ -52,6 +71,7 @@ Game.prototype.start = function() {
       this.moveAll();
       this.every100();
       this.every200papers();
+      this.levelup();
       this.clearObstacles();
 
       if (this.isCollision(this.zombies)) {
@@ -104,6 +124,7 @@ Game.prototype.reset = function() {
   this.score = 0;
   this.getpapers = 0;
   this.killed = [];
+  this.level = 1;
 };
 
 Game.prototype.isCollision = function(enemy) {
@@ -115,9 +136,13 @@ Game.prototype.isCollision = function(enemy) {
 };
 
 Game.prototype.isCollision2 = function(enemy) {
+  console.log("hola")
   return enemy.some(
     function(e) {
-      return this.player.x + 50 == e.x && this.player.y + this.player.h <= e.y;
+      return this.player.x +50 > e.x + (e.w - 100) &&
+      this.player.x + this.player.w > e.x &&
+      this.player.y < e.y + e.h &&
+      this.player.y + this.player.h > e.y;
     }.bind(this)
   );
 };
@@ -171,6 +196,15 @@ Game.prototype.every100 = function() {
 Game.prototype.every200papers = function() {
   if (this.getpapers % 200 == 0 && this.getpapers > 0) {
     this.paperhit.draw();
+  }
+};
+
+Game.prototype.levelup = function() {
+  if (this.getpapers > 200 && this.score > 700) {
+    this.level = 2;
+    console.log(this.level);
+  } else if (this.getpapers > 400 && this.score > 1500) {
+    this.level = 3;
   }
 };
 
@@ -233,7 +267,9 @@ Game.prototype.draw = function() {
   this.ctx.fillStyle = "yellow";
   this.ctx.fillText("Score: " + Math.floor(this.score) + " points!", 1000, 75);
   this.ctx.fillStyle = "#00ffbf";
-  this.ctx.fillText("Papers: " + Math.floor(this.getpapers),  75, 75);
+  this.ctx.fillText("Papers: " + Math.floor(this.getpapers), 300, 75);
+  this.ctx.fillStyle = "#00ffbf";
+  this.ctx.fillText("Level: " + Math.floor(this.level), 75, 75);
 };
 
 /*Game.prototype.isProgress = function(getpapers) {
@@ -273,5 +309,4 @@ Game.prototype.moveAll = function() {
   this.papers.forEach(function(paper) {
     paper.move();
   });
-  
 };
