@@ -202,9 +202,9 @@ Game.prototype.every200papers = function() {
 Game.prototype.levelup = function() {
   if (this.getpapers > 200 && this.score > 700) {
     this.level = 2;
-    console.log(this.level);
   } else if (this.getpapers > 400 && this.score > 1500) {
     this.level = 3;
+    console.log(this.level);
   }
 };
 
