@@ -200,11 +200,10 @@ Game.prototype.every200papers = function() {
 };
 
 Game.prototype.levelup = function() {
-  if (this.getpapers > 200 && this.score > 700) {
+  if (this.getpapers > 200 && this.score > 700 && this.score < 900) {
     this.level = 2;
-  } else if (this.getpapers > 400 && this.score > 1500) {
+  } else if (this.getpapers > 500 && this.score > 900) {
     this.level = 3;
-    console.log(this.level);
   }
 };
 
@@ -266,8 +265,8 @@ Game.prototype.draw = function() {
   this.ctx.fillStyle = "#00ffbf";
   this.ctx.fillStyle = "yellow";
   this.ctx.fillText("Score: " + Math.floor(this.score) + " points!", 1000, 75);
-  this.ctx.fillStyle = "#00ffbf";
-  this.ctx.fillText("Papers: " + Math.floor(this.getpapers), 300, 75);
+  this.ctx.fillStyle = "#bf00ff";
+  this.ctx.fillText("Papers: " + Math.floor(this.getpapers), 500, 75);
   this.ctx.fillStyle = "#00ffbf";
   this.ctx.fillText("Level: " + Math.floor(this.level), 75, 75);
 };
