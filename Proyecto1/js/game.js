@@ -62,7 +62,7 @@ Game.prototype.start = function() {
         this.gameOver();
       }
 
-      if (this.isCollision(this.obstacles)) {
+      if (this.isCollision2(this.obstacles)) {
         this.gameOver();
       }
 
@@ -110,6 +110,14 @@ Game.prototype.isCollision = function(enemy) {
   return enemy.some(
     function(e) {
       return this.player.x + 50 == e.x && this.player.y + this.player.h >= e.y;
+    }.bind(this)
+  );
+};
+
+Game.prototype.isCollision2 = function(enemy) {
+  return enemy.some(
+    function(e) {
+      return this.player.x + 50 == e.x && this.player.y + this.player.h <= e.y;
     }.bind(this)
   );
 };
