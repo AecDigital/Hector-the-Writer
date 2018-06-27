@@ -9,7 +9,7 @@ function Game(canvadId) {
   this.zombie2frecuence = 0;
   this.papersfrecuence = 0;
   this.music = new Audio("audio/game_music.mp3");
-  this.gameoversound = new Audio("audio/game_music.mp3")
+  this.gameoversound = new Audio("audio/game_over.mp3")
 }
 
 Game.prototype.start = function() {
