@@ -82,15 +82,15 @@ Game.prototype.start = function() {
       this.levelup();
       this.clearObstacles();
 
-      if (this.isCollision2(this.zombies)) {
+      if (this.isCollision(this.zombies)) {
         this.gameOver();
       }
 
-      if (this.isCollision2(this.zombies2)) {
+      if (this.isCollision(this.zombies2)) {
         this.gameOver();
       }
 
-      if (this.isCollision2(this.obstacles)) {
+      if (this.isCollision(this.obstacles)) {
         this.gameOver();
       }
 
@@ -136,14 +136,6 @@ Game.prototype.reset = function() {
 };
 
 Game.prototype.isCollision = function(enemy) {
-  return enemy.some(
-    function(e) {
-      return this.player.x + 50 == e.x && this.player.y + this.player.h >= e.y;
-    }.bind(this)
-  );
-};
-
-Game.prototype.isCollision2 = function(enemy) {
   return enemy.some(
     function(e) {
       return (
@@ -279,27 +271,6 @@ Game.prototype.draw = function() {
   this.ctx.fillStyle = "#00ffbf";
   this.ctx.fillText("Level: " + Math.floor(this.level), 75, 75);
 };
-
-/*Game.prototype.isProgress = function(getpapers) {
-  if (this.getpapers == 0) {
-    this.ctx.fillStyle = "#00ffbf";
-    this.ctx.fillRect(50, 50, 15, 50);
-    this.ctx.fillText(
-      "Papers Recovery: " + Math.floor(this.getpapers) + " not yet!",
-      500,
-      75
-    );
-  } else if (this.getpapers > 0 && this.getpapers <= 120) {
-    this.ctx.font = "50px sans-serif";
-    this.ctx.fillStyle = "#00ffbf";
-    this.ctx.fillRect(50, 50, 100, 50);
-    this.ctx.fillText(
-      "Papers Recovery " + Math.floor(this.getpapers) + " papers!!",
-      500,
-      75
-    );
-  }
-};*/
 
 Game.prototype.moveAll = function() {
   this.background.move();

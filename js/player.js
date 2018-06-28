@@ -1,12 +1,12 @@
 function Player(game) {
   this.game = game;
- 
+
   this.x = this.game.canvas.width * 0.08;
   this.y0 = this.game.canvas.height * 0.38;
   this.y = this.y0;
 
   this.img = new Image();
-  this.img.src = 'img/player.png';
+  this.img.src = "img/player.png";
   this.img.frames = 10;
   this.img.frameIndex = 0;
 
@@ -36,9 +36,11 @@ Player.prototype.draw = function() {
 
   this.animateImg();
 
-  this.bullets = this.bullets.filter(function(bullet) {
-    return bullet.x < this.game.canvas.width;
-  }.bind(this));
+  this.bullets = this.bullets.filter(
+    function(bullet) {
+      return bullet.x < this.game.canvas.width;
+    }.bind(this)
+  );
 
   this.bullets.forEach(function(bullet) {
     bullet.draw();
@@ -51,7 +53,7 @@ Player.prototype.setListeners = function() {
     if (event.keyCode === TOP_KEY && this.y == this.y0) {
       this.y -= 5;
       this.vy -= 15;
-       } else if (event.keyCode == SPACE) {
+    } else if (event.keyCode == SPACE) {
       this.shoot();
     }
   }.bind(this);
