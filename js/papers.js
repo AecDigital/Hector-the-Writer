@@ -1,12 +1,8 @@
 function paper(game) {
   this.game = game;
-
   this.papers = [];
-
   this.img = new Image();
   this.img.src = "./img/papers2.png";
-
-  
   this.w = 300;
   this.h = 300;
   this.dx = 3;
@@ -21,9 +17,7 @@ paper.prototype.draw = function() {
     this.w,
     this.h,
     );
-  
 };
-
 paper.prototype.move = function() {
   this.x -= this.dx;
 };

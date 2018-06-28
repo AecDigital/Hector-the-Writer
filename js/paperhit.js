@@ -1,8 +1,6 @@
 function paperhit(game) {
   this.game = game;
-
   this.paperhit = [];
-
   this.img = new Image();
   this.img.src = "./img/yeah.png";
   this.x = 350;
@@ -23,7 +21,6 @@ paperhit.prototype.draw = function() {
     this.h
   );
 };
-
 paperhit.prototype.move = function() {
   this.x -= this.dx;
 };

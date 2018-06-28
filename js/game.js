@@ -261,7 +261,6 @@ Game.prototype.draw = function() {
   this.papers.forEach(function(paper) {
     paper.draw();
   });
-
   this.ctx.font = "50px sans-serif";
   this.ctx.fillStyle = "#00ffbf";
   this.ctx.fillStyle = "yellow";
@@ -275,7 +274,6 @@ Game.prototype.draw = function() {
 Game.prototype.moveAll = function() {
   this.background.move();
   this.player.move();
-
   this.obstacles.forEach(function(obstacle) {
     obstacle.move();
   });

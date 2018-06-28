@@ -1,23 +1,17 @@
 function Player(game) {
   this.game = game;
-
   this.x = this.game.canvas.width * 0.08;
   this.y0 = this.game.canvas.height * 0.38;
   this.y = this.y0;
-
   this.img = new Image();
   this.img.src = "img/player.png";
   this.img.frames = 10;
   this.img.frameIndex = 0;
-
   this.w = 180;
   this.h = 180;
-
   this.vy = 1;
   this.a = 1.5;
-
   this.bullets = [];
-
   this.setListeners();
 }
 
@@ -33,15 +27,12 @@ Player.prototype.draw = function() {
     this.w,
     this.h
   );
-
   this.animateImg();
-
   this.bullets = this.bullets.filter(
     function(bullet) {
       return bullet.x < this.game.canvas.width;
     }.bind(this)
   );
-
   this.bullets.forEach(function(bullet) {
     bullet.draw();
     bullet.move();
@@ -66,7 +57,7 @@ Player.prototype.shoot = function() {
 
 Player.prototype.animateImg = function() {
   if (this.game.framesCounter % 10 === 0) {
-    this.img.frameIndex += 1;
+      this.img.frameIndex += 1;
 
     if (this.img.frameIndex > 8) this.img.frameIndex = 0;
   }

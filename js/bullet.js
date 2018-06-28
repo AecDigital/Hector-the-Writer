@@ -11,7 +11,6 @@ function Bullet(game, x, y) {
 
   this.a = 0.25;
 }
-
 Bullet.prototype.draw = function() {
   this.game.ctx.beginPath();
   this.game.ctx.fillStyle = "#00ffbf";
@@ -19,13 +18,10 @@ Bullet.prototype.draw = function() {
   this.game.ctx.fill();
   this.game.ctx.closePath();
 }
-
 Bullet.prototype.move = function() {
   this.x += this.vx;
-
   this.vy += this.a;
   this.y += this.vy;
-
   if (this.y > this.game.player.y0 + this.game.player.h) {
     this.vy *= -2;
   }
