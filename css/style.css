@@ -1,5 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Kalam');
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
 canvas {
   margin: 0, auto;
   margin-top: 50px;
 }
 
+body {
+  background-color: yellow;
+}
+
+button {
+  background-color: #800080;
+  border: solid;
+  border-color: #800080;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 32px;
+  width: 25%;
+  padding: 25px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.intro-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+h1 {
+  font-family: kalam;
+  color: black;
+  font-size: 5rem;
+}

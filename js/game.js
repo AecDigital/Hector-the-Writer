@@ -82,13 +82,13 @@ Game.prototype.start = function() {
       this.levelup();
       this.clearObstacles();
 
-      if (this.isCollision(this.zombies)) {
+      if (this.isCollision2(this.zombies)) {
         this.gameOver();
         this.music.stop();
 
       }
 
-      if (this.isCollision(this.zombies2)) {
+      if (this.isCollision2(this.zombies2)) {
         this.gameOver();
         this.music.stop();
       }
