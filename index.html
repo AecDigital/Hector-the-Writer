@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>My Game</title>
 
@@ -17,16 +18,23 @@
   <script type="text/javascript" src="js/index.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-  <body>
-      <div class ="intro">
-          <div class="intro-info">
-            <img src="./img/personaje-2.png" alt="" style="width:20%;">
-            <h1>Hector the Writer</h1>
-          </div>
-          <button id="start-button">Start Game!</button>
-        </div>
-          <div id="game-board">
-            <canvas id="canvas" width="1420" height="700"></canvas>
-          </div>
+
+<body>
+  <div class="intro">
+    <div class="intro-info">
+      <img src="./img/personaje-2.png" alt="" style="width:30%;">
+      <h1>Hector the Writer</h1>
+    </div>
+    <div class="boton">
+      <button id="start-button">Start Game!</button>
+    </div>
+    <div class="instructions">
+      <p>Use Space Bar for Hector shooting. Key Up (^ ) if you wanna jump...</p>
+    </div>
+  </div>
+  <div id="game-board">
+    <canvas id="canvas" width="1420" height="700"></canvas>
+  </div>
 </body>
+
 </html>

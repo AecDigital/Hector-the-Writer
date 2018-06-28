@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Kalam');
-@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 canvas {
   margin: 0, auto;
   margin-top: 50px;
@@ -17,7 +18,7 @@ button {
   text-align: center;
   text-decoration: none;
   font-size: 32px;
-  width: 25%;
+  width: 20%;
   padding: 25px;
 }
 
@@ -25,16 +26,35 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 100px;
 }
 
 .intro-info {
   display: flex;
-  justify-content: space-around;
   align-items: center;
 }
 
 h1 {
   font-family: kalam;
-  color: black;
-  font-size: 5rem;
+  color: #800080;
+  font-size: 7rem;
+  font-style: italic;
+}
+
+.boton {
+  display: flex;
+  justify-content: center;
+}
+
+p {
+  margin-top: 20px;
+  font-family: roboto;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.instructions{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
