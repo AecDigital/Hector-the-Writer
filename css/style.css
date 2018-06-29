@@ -2,12 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 canvas {
-  margin: 0, auto;
+  margin: 0 auto;
   margin-top: 50px;
 }
 
 body {
   background-color: yellow;
+}
+
+#game-board {
+  text-align: center;
 }
 
 button {
