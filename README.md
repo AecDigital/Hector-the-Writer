@@ -7,7 +7,8 @@ HECTOR THE WRITER
 
 DESCRIPTION
 -----------
-Just a shoot'em up game made with canvas & HTML5. Give it a chance to Hector and enjoy!
+Just a shoot'em up game made with Canvas & HTML5. 
+Give it a chance to Hector and enjoy!
 
 DEVELOPED BY
 ------------
